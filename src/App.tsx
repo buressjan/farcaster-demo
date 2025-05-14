@@ -145,14 +145,19 @@ function SignButton() {
 }
 
 function ExternalRedirect() {
+  async function handleRedirect() {
+    const isMiniApp = await sdk.isInMiniApp();
+    const url = 'https://app.metalend.tech';
+
+    if (isMiniApp) {
+      sdk.actions.openUrl(url);
+    } else {
+      window.open(url, '_blank');
+    }
+  }
+
   return (
-    <button
-      onClick={() => {
-        sdk.actions.openUrl(
-          'https://app.metalend.tech'
-        );
-      }}
-    >
+    <button onClick={handleRedirect}>
       Redirect to Metalend
     </button>
   );

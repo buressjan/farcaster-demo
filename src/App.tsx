@@ -1,6 +1,10 @@
-import { sdk } from "@farcaster/frame-sdk";
-import { useEffect } from "react";
-import { useAccount, useConnect, useSignMessage } from "wagmi";
+import { sdk } from '@farcaster/frame-sdk';
+import { useEffect } from 'react';
+import {
+  useAccount,
+  useConnect,
+  useSignMessage,
+} from 'wagmi';
 
 function App() {
   useEffect(() => {
@@ -9,7 +13,9 @@ function App() {
 
   return (
     <>
-      <div>Mini App + Vite + TS + React + Wagmi</div>
+      <div>
+        Mini App + Vite + TS + React + Wagmi
+      </div>
       <ConnectMenu />
     </>
   );
@@ -18,6 +24,11 @@ function App() {
 function ConnectMenu() {
   const { isConnected, address } = useAccount();
   const { connect, connectors } = useConnect();
+
+  const handleConnect = () => {
+    console.log('connectors', connectors);
+    connect({ connector: connectors[0] });
+  };
 
   if (isConnected) {
     return (
@@ -30,19 +41,28 @@ function ConnectMenu() {
   }
 
   return (
-    <button type="button" onClick={() => connect({ connector: connectors[0] })}>
+    <button type='button' onClick={handleConnect}>
       Connect
     </button>
   );
 }
 
 function SignButton() {
-  const { signMessage, isPending, data, error } = useSignMessage();
+  const { signMessage, isPending, data, error } =
+    useSignMessage();
 
   return (
     <>
-      <button type="button" onClick={() => signMessage({ message: "hello world" })} disabled={isPending}>
-        {isPending ? "Signing..." : "Sign message"}
+      <button
+        type='button'
+        onClick={() =>
+          signMessage({ message: 'hello world' })
+        }
+        disabled={isPending}
+      >
+        {isPending
+          ? 'Signing...'
+          : 'Sign message'}
       </button>
       {data && (
         <>

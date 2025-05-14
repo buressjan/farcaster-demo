@@ -152,7 +152,7 @@ function ExternalRedirect() {
     if (isMiniApp) {
       sdk.actions.openUrl(url);
     } else {
-      window.open(url);
+      window.location.href = url;
     }
   }
 

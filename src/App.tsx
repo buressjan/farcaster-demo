@@ -7,9 +7,38 @@ import {
 } from 'wagmi';
 
 function App() {
+  const [context, setContext] =
+    useState<any>(null);
+
   useEffect(() => {
     sdk.actions.ready();
-    console.log('sdk.context', sdk.context);
+
+    async function fetchContext() {
+      const contextAwaited = await sdk.context;
+      if (!contextAwaited) {
+        console.warn(
+          'No Farcaster context available'
+        );
+        setContext(null);
+        return;
+      }
+      console.log(
+        'sdk.context.user:',
+        contextAwaited.user
+      );
+      console.log(
+        'sdk.context.location:',
+        contextAwaited.location
+      );
+      console.log(
+        'sdk.context.client:',
+        contextAwaited.client
+      );
+
+      setContext(contextAwaited);
+    }
+
+    fetchContext();
   }, []);
 
   return (
@@ -18,7 +47,12 @@ function App() {
         Mini App + Vite + TS + React + Wagmi
       </div>
       <ConnectMenu />
-      <ContextDisplay />
+      <div>
+        <span>
+          Context:{' '}
+          {JSON.stringify(context, null, 2)}
+        </span>
+      </div>
     </>
   );
 }
@@ -79,38 +113,6 @@ function SignButton() {
         </>
       )}
     </>
-  );
-}
-
-function ContextDisplay() {
-  const [context, setContext] =
-    useState<any>(null);
-
-  useEffect(() => {
-    // sdk.context is available immediately in Warpcast Mini Apps
-    setContext(sdk.context);
-    // Optionally, log it for debugging
-    console.log(
-      'Farcaster Mini App context:',
-      sdk.context
-    );
-  }, []);
-
-  if (!context)
-    return <div>Loading context...</div>;
-
-  return (
-    <pre
-      style={{
-        color: 'white',
-        background: '#222',
-        padding: 16,
-        borderRadius: 8,
-      }}
-    >
-      Context:
-      {JSON.stringify(context, null, 2)}
-    </pre>
   );
 }
 

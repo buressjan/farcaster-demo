@@ -2,11 +2,11 @@
   "frame": {
     "version": "1",
     "name": "Farcaster Demo",
-    "iconUrl": "https://d26nkljutfj8pz.cloudfront.net/images/logo.png",
-    "splashImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png",
+    "iconUrl": "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original",
+    "splashImageUrl": "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original",
     "splashBackgroundColor": "#060a20",
     "homeUrl": "https://farcaster-demo-one.vercel.app/",
-    "description": "Metalend - Search 15,000 DeFi pools in one place!",
+    "description": "Lorem",
     "primaryCategory": "finance",
     "tags": [
       "defi",
@@ -17,11 +17,11 @@
     ],
     "tagline": "DeFi Pool Search",
     "screenshotUrls": [
-      "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png"
+      "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original"
     ],
-    "heroImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png",
-    "ogTitle": "Metalend - DeFi Pool Search",
-    "ogDescription": "Search and compare 15,000 DeFi pools in one place",
-    "ogImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png"
+    "heroImageUrl": "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original",
+    "ogTitle": "Lorem",
+    "ogDescription": "Lorem ipsum",
+    "ogImageUrl": "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original"
   }
 }

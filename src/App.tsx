@@ -1,5 +1,5 @@
 import { sdk } from '@farcaster/frame-sdk';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   useAccount,
   useConnect,

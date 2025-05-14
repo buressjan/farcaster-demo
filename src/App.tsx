@@ -1,5 +1,5 @@
 import { sdk } from '@farcaster/frame-sdk';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   useAccount,
   useConnect,
@@ -9,6 +9,10 @@ import {
 function App() {
   const [context, setContext] =
     useState<any>(null);
+
+  useEffect(() => {
+    sdk.actions.ready();
+  }, []);
 
   return (
     <>

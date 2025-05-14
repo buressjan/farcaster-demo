@@ -9,6 +9,7 @@ import {
 function App() {
   useEffect(() => {
     sdk.actions.ready();
+    console.log('sdk.context', sdk.context);
   }, []);
 
   return (
@@ -107,6 +108,7 @@ function ContextDisplay() {
         borderRadius: 8,
       }}
     >
+      Context:
       {JSON.stringify(context, null, 2)}
     </pre>
   );

@@ -1,5 +1,5 @@
 import { sdk } from '@farcaster/frame-sdk';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   useAccount,
   useConnect,
@@ -17,6 +17,7 @@ function App() {
         Mini App + Vite + TS + React + Wagmi
       </div>
       <ConnectMenu />
+      <ContextDisplay />
     </>
   );
 }
@@ -77,6 +78,37 @@ function SignButton() {
         </>
       )}
     </>
+  );
+}
+
+function ContextDisplay() {
+  const [context, setContext] =
+    useState<any>(null);
+
+  useEffect(() => {
+    // sdk.context is available immediately in Warpcast Mini Apps
+    setContext(sdk.context);
+    // Optionally, log it for debugging
+    console.log(
+      'Farcaster Mini App context:',
+      sdk.context
+    );
+  }, []);
+
+  if (!context)
+    return <div>Loading context...</div>;
+
+  return (
+    <pre
+      style={{
+        color: 'white',
+        background: '#222',
+        padding: 16,
+        borderRadius: 8,
+      }}
+    >
+      {JSON.stringify(context, null, 2)}
+    </pre>
   );
 }
 

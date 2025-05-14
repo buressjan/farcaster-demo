@@ -5,7 +5,7 @@
     "iconUrl": "https://d26nkljutfj8pz.cloudfront.net/images/logo.png",
     "splashImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png",
     "splashBackgroundColor": "#060a20",
-    "homeUrl": "https://dev.metalend.tech/miniapp",
+    "homeUrl": "https://farcaster-demo-one.vercel.app/",
     "description": "Metalend - Search 15,000 DeFi pools in one place!",
     "primaryCategory": "finance",
     "tags": [

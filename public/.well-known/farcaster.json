@@ -1,1 +1,27 @@
-{}
+{
+  "frame": {
+    "version": "1",
+    "name": "Farcaster Demo",
+    "iconUrl": "https://d26nkljutfj8pz.cloudfront.net/images/logo.png",
+    "splashImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png",
+    "splashBackgroundColor": "#060a20",
+    "homeUrl": "https://dev.metalend.tech/miniapp",
+    "description": "Metalend - Search 15,000 DeFi pools in one place!",
+    "primaryCategory": "finance",
+    "tags": [
+      "defi",
+      "lending",
+      "yield",
+      "crypto",
+      "finance"
+    ],
+    "tagline": "DeFi Pool Search",
+    "screenshotUrls": [
+      "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png"
+    ],
+    "heroImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png",
+    "ogTitle": "Metalend - DeFi Pool Search",
+    "ogDescription": "Search and compare 15,000 DeFi pools in one place",
+    "ogImageUrl": "https://d26nkljutfj8pz.cloudfront.net/images/metalend-preview.png"
+  }
+}

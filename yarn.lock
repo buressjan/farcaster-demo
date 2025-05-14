@@ -523,7 +523,7 @@
     ox "^0.4.4"
     zod "^3.24.1"
 
-"@farcaster/frame-sdk@latest":
+"@farcaster/frame-sdk@^0.0.41":
   version "0.0.41"
   resolved "https://registry.yarnpkg.com/@farcaster/frame-sdk/-/frame-sdk-0.0.41.tgz#134d1b6028bdfc64085e025dd952c3b64c23ade1"
   integrity sha512-JYIRFg2ikf2z96cVLXYTaZVrUDxWjzKVlq7Eq9bJVClkQxpAUl/sARwvokx8pQAcSl7nQiemeF0nE1qvn3ZBYQ==

@@ -17,6 +17,7 @@ function App() {
       </div>
       <ConnectMenu setContext={setContext} />
       <ContextDetails context={context} />
+      <ExternalRedirect />
     </>
   );
 }
@@ -140,6 +141,20 @@ function SignButton() {
         </>
       )}
     </>
+  );
+}
+
+function ExternalRedirect() {
+  return (
+    <button
+      onClick={() => {
+        sdk.actions.openUrl(
+          'https://app.metalend.tech'
+        );
+      }}
+    >
+      Redirect to Metalend
+    </button>
   );
 }
 

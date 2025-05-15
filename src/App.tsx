@@ -148,13 +148,17 @@ function SignButton() {
   );
 }
 
-function ExternalRedirect() {
+function ExternalRedirect({ internal = false }) {
   async function handleRedirect() {
     const isMiniApp = await sdk.isInMiniApp();
     const url = 'https://app.metalend.tech';
 
     if (isMiniApp) {
-      sdk.actions.openUrl(url);
+      if (internal) {
+        sdk.actions.openUrl(url);
+      } else {
+        window.location.href = url;
+      }
     } else {
       window.location.href = url;
     }

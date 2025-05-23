@@ -1,5 +1,10 @@
 {
   "frame": {
+    "accountAssociation": {
+      "header": "eyJmaWQiOjEwNjE1ODMsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhCMDhiZkJhNjVFQWRkRDUyQ2M4MmIwNDc5Qzk4MERlNTc2NzY4NmUwIn0",
+      "payload": "eyJkb21haW4iOiJmYXJjYXN0ZXItZGVtby1vbmUudmVyY2VsLmFwcCJ9",
+      "signature": "MHg3ZjdkZDFiOGFiZTg5NDFlNzJiOTVhZjJkNDUzNTU5NWE4MTQ1YTg4ODVhMzlmOTYzZTg4ZGQwMmE5MTk0MmJiMDkxYWRmYjE4Y2Q2NjU0ZDQ1YjY4YmRiMDRmNzkxMWVhZDhiZTM4NmMwYzlkZTlhNjUzZTRkZTEyNDU2NjJjYjFi"
+    },
     "version": "1",
     "name": "Farcaster Demo",
     "iconUrl": "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original",

@@ -17,14 +17,18 @@ function ComposeCast({
     // Create a message that includes user context
     const message = `Hello from the Metalend Mini App! 
     
-I'm ${context.user.displayName || context.user.username || `FID: ${context.user.fid}`} checking out this demo.
+I'm ${context.user.displayName || context.user.username || `FID: ${context.user.fid}`}.
+
+You can now get 13.41% APY on USDC with Morpho!
 
 #FarcasterMiniApp #Metalend`;
     try {
       // Open the compose screen with pre-filled text
       await sdk.actions.composeCast({
         text: message,
-        embeds: ['https://app.metalend.tech'],
+        embeds: [
+          'https://app.metalend.tech/Usdc_Morpho_Ethereum_13.41',
+        ],
       });
       console.log(
         'Compose cast opened successfully'

@@ -10,10 +10,27 @@ import ComposeCast from './CastComposer';
 function App() {
   const [context, setContext] =
     useState<any>(null);
+  const { isConnected } = useAccount();
 
+  // Fetch context when app loads or when connection status changes
   useEffect(() => {
     sdk.actions.ready();
-  }, []);
+
+    async function fetchContext() {
+      if (isConnected) {
+        const contextAwaited = await sdk.context;
+        if (contextAwaited) {
+          setContext(contextAwaited);
+        } else {
+          console.warn(
+            'No Farcaster context available'
+          );
+        }
+      }
+    }
+
+    fetchContext();
+  }, [isConnected]); // Refetch whenever connection status changes
 
   return (
     <>
@@ -21,9 +38,9 @@ function App() {
         Mini App + Vite + TS + React + Wagmi
       </div>
       <ConnectMenu setContext={setContext} />
+      Context below:
       <ContextDetails context={context} />
       <ExternalRedirect />
-
       <ComposeCast context={context} />
     </>
   );
@@ -56,6 +73,12 @@ function ConnectMenu({
   if (isConnected) {
     return (
       <>
+        <div>
+          <span>Connectors: </span>
+          <pre>
+            {JSON.stringify(connectors, null, 2)}
+          </pre>
+        </div>
         <div>Connected account:</div>
         <div>{address}</div>
         <SignButton />

@@ -27,7 +27,7 @@ You can now get 13.41% APY on USDC with Morpho!
       await sdk.actions.composeCast({
         text: message,
         embeds: [
-          'https://app.metalend.tech/Usdc_Morpho_Ethereum_13.41',
+          'https://app.metalend.tech/?yield=Usdc_Morpho_Ethereum_13.41&validatorId=ethereum-usdc-fxusdc-0x4f460bb11cf958606c69a963b4a17f9daeeea8b6-4626-vault',
         ],
       });
       console.log(

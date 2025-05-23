@@ -23,7 +23,6 @@ function App() {
       <ConnectMenu setContext={setContext} />
       <ContextDetails context={context} />
       <ExternalRedirect />
-      {/* <EmbeddedMetalend /> */}
 
       <ComposeCast context={context} />
     </>
@@ -172,32 +171,6 @@ function ExternalRedirect({ internal = false }) {
     <button onClick={handleRedirect}>
       Redirect to Metalend
     </button>
-  );
-}
-
-function EmbeddedMetalend() {
-  return (
-    <div
-      style={{
-        marginTop: 20,
-        width: 400,
-        height: 400,
-      }}
-    >
-      <h3>Embedded Metalend Earn</h3>
-      <iframe
-        src='https://app.metalend.tech'
-        title='Metalend Earn'
-        style={{
-          width: '100%',
-          height: '100%',
-          border: '1px solid #ccc',
-          borderRadius: 8,
-          backgroundColor: '#fff',
-        }}
-        allow='clipboard-write; encrypted-media; fullscreen; payment'
-      />
-    </div>
   );
 }
 

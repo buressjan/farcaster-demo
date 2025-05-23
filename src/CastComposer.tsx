@@ -9,7 +9,7 @@ function ComposeCast({
     // Don't proceed if we don't have context
     if (!context || !context.user) {
       console.warn(
-        'No Farcaster context available for composing cast'
+        'No Farcaster  context available for composing cast'
       );
       return;
     }

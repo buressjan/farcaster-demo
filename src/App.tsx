@@ -5,7 +5,6 @@ import {
   useConnect,
   useSignMessage,
 } from 'wagmi';
-import ComposeCast from './CastComposer';
 
 function App() {
   const [context, setContext] =
@@ -41,7 +40,6 @@ function App() {
       Context below:
       <ContextDetails context={context} />
       <ExternalRedirect />
-      <ComposeCast context={context} />
     </>
   );
 }

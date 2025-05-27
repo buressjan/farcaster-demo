@@ -5,6 +5,9 @@ import {
   useConnect,
   useSignMessage,
 } from 'wagmi';
+import ComposeCast from './CastComposer';
+import ViewProfileSubscribe from './ViewProfileSubscribe';
+import AddMiniApp from './AddMiniApp';
 
 function App() {
   const [context, setContext] =
@@ -40,6 +43,9 @@ function App() {
       Context below:
       <ContextDetails context={context} />
       <ExternalRedirect />
+      <ComposeCast context={context} />
+      <ViewProfileSubscribe />
+      <AddMiniApp />
     </>
   );
 }

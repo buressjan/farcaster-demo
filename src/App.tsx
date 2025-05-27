@@ -6,6 +6,7 @@ import {
   useSignMessage,
 } from 'wagmi';
 import ComposeCast from './CastComposer';
+import ViewProfileSubscribe from './ViewProfileSubscribe';
 
 function App() {
   const [context, setContext] =
@@ -42,6 +43,7 @@ function App() {
       <ContextDetails context={context} />
       <ExternalRedirect />
       <ComposeCast context={context} />
+      <ViewProfileSubscribe />
     </>
   );
 }

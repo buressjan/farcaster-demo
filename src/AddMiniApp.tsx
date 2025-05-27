@@ -38,7 +38,7 @@ function AddMiniApp() {
           err.name,
       ]);
 
-      if (err.name === 'RejectedByUser') {
+      if (err.name.includes('RejectedByUser')) {
         setAppAdded(false);
       }
     }

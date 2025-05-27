@@ -31,7 +31,7 @@ function AddMiniApp() {
         'Unknown error';
       setErrors((prev) => [
         ...prev,
-        errorMessage,
+        errorMessage + ' ' + err.type,
       ]);
 
       if (err.name === 'RejectedByUser') {

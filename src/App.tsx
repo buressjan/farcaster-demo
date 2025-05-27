@@ -43,7 +43,7 @@ function App() {
       <ContextDetails context={context} />
       <ExternalRedirect />
       <ComposeCast context={context} />
-      <ViewProfileSubscribe />
+      {/* <ViewProfileSubscribe /> */}
     </>
   );
 }

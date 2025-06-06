@@ -1,18 +1,30 @@
 import { sdk } from '@farcaster/frame-sdk';
 import { useEffect, useState } from 'react';
 import {
-  useAccount,
-  useConnect,
-  useSignMessage,
-} from 'wagmi';
+  usePrivy,
+  useWallets,
+} from '@privy-io/react-auth';
 import ComposeCast from './CastComposer';
 import ViewProfileSubscribe from './ViewProfileSubscribe';
 import AddMiniApp from './AddMiniApp';
+import PrivyAuth from './PrivyAuth';
 
 function App() {
+  return (
+    <PrivyAuth>
+      <AppContent />
+    </PrivyAuth>
+  );
+}
+
+function AppContent() {
   const [context, setContext] =
     useState<any>(null);
-  const { isConnected } = useAccount();
+  const { ready, authenticated } = usePrivy();
+  const { wallets } = useWallets();
+
+  const isConnected =
+    authenticated && wallets.length > 0;
 
   // Fetch context when app loads or when connection status changes
   useEffect(() => {
@@ -32,21 +44,40 @@ function App() {
     }
 
     fetchContext();
-  }, [isConnected]); // Refetch whenever connection status changes
+  }, [isConnected]);
+
+  if (!ready) {
+    return <div>Loading Privy...</div>;
+  }
 
   return (
-    <>
-      <div>
-        Mini App + Vite + TS + React + Wagmi
+    <div style={{ padding: '20px' }}>
+      <div
+        style={{
+          fontSize: '24px',
+          fontWeight: 'bold',
+          marginBottom: '20px',
+          color: '#fff',
+        }}
+      >
+        Farcaster Mini App Demo
       </div>
-      <ConnectMenu setContext={setContext} />
-      Context below:
-      <ContextDetails context={context} />
-      <ExternalRedirect />
-      <ComposeCast context={context} />
-      <ViewProfileSubscribe />
-      <AddMiniApp />
-    </>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}
+      >
+        <ConnectMenu setContext={setContext} />
+        Context below:
+        <ContextDetails context={context} />
+        <ExternalRedirect />
+        <ComposeCast context={context} />
+        <ViewProfileSubscribe />
+        <AddMiniApp />
+      </div>
+    </div>
   );
 }
 
@@ -55,44 +86,74 @@ function ConnectMenu({
 }: {
   setContext: (ctx: any) => void;
 }) {
-  const { isConnected, address } = useAccount();
-  const { connect, connectors } = useConnect();
+  const { ready, authenticated, connectWallet } =
+    usePrivy();
+  const { wallets } = useWallets();
+  const [privyContext, setPrivyContext] =
+    useState<any>(null);
+
+  const isConnected =
+    authenticated && wallets.length > 0;
+  const primaryWallet = wallets[0];
 
   const handleConnect = async () => {
-    console.log('connectors', connectors);
-    connect({ connector: connectors[0] });
+    if (!authenticated) {
+      return;
+    }
 
-    // Fetch and set Farcaster context on connect
+    if (wallets.length === 0) {
+      await connectWallet();
+    }
+
     const contextAwaited = await sdk.context;
+    console.log('contextAwaited', contextAwaited);
     if (!contextAwaited) {
       console.warn(
         'No Farcaster context available'
       );
       setContext(null);
+      setPrivyContext(null);
       return;
     }
     setContext(contextAwaited);
+    setPrivyContext(contextAwaited);
   };
 
-  if (isConnected) {
+  if (!ready) {
+    return <div>Loading...</div>;
+  }
+
+  if (isConnected && primaryWallet) {
     return (
       <>
         <div>
-          <span>Connectors: </span>
-          <pre>
-            {JSON.stringify(connectors, null, 2)}
-          </pre>
+          <div>
+            Connected wallet:{' '}
+            {primaryWallet.address}
+          </div>
+          <div>
+            Wallet type:{' '}
+            {primaryWallet.walletClientType}
+          </div>
+          <div>
+            Privy context:{' '}
+            {JSON.stringify(
+              privyContext,
+              null,
+              2
+            )}
+          </div>
+          <SignButton wallet={primaryWallet} />
         </div>
-        <div>Connected account:</div>
-        <div>{address}</div>
-        <SignButton />
       </>
     );
   }
 
   return (
     <button type='button' onClick={handleConnect}>
-      Connect
+      {wallets.length === 0
+        ? 'Connect Wallet'
+        : 'Reconnect'}
     </button>
   );
 }
@@ -145,33 +206,64 @@ function ContextDetails({
   );
 }
 
-function SignButton() {
-  const { signMessage, isPending, data, error } =
-    useSignMessage();
+function SignButton({ wallet }: { wallet: any }) {
+  const [isPending, setIsPending] =
+    useState(false);
+  const [signature, setSignature] = useState<
+    string | null
+  >(null);
+  const [error, setError] = useState<
+    string | null
+  >(null);
+
+  const signMessage = async () => {
+    if (!wallet) return;
+
+    setIsPending(true);
+    setError(null);
+
+    try {
+      const message = 'hello world';
+      const signature =
+        await wallet.sign(message);
+      setSignature(signature);
+    } catch (err: any) {
+      setError(
+        err.message || 'Failed to sign message'
+      );
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   return (
     <>
       <button
         type='button'
-        onClick={() =>
-          signMessage({ message: 'hello world' })
-        }
+        onClick={signMessage}
         disabled={isPending}
       >
         {isPending
           ? 'Signing...'
           : 'Sign message'}
       </button>
-      {data && (
+      {signature && (
         <>
           <div>Signature</div>
-          <div>{data}</div>
+          <div
+            style={{
+              wordBreak: 'break-all',
+              fontSize: '12px',
+            }}
+          >
+            {signature}
+          </div>
         </>
       )}
       {error && (
         <>
           <div>Error</div>
-          <div>{error.message}</div>
+          <div>{error}</div>
         </>
       )}
     </>
@@ -195,7 +287,12 @@ function ExternalRedirect({ internal = false }) {
   }
 
   return (
-    <button onClick={handleRedirect}>
+    <button
+      onClick={handleRedirect}
+      style={{
+        width: 'fit-content',
+      }}
+    >
       Redirect to Metalend
     </button>
   );

@@ -28,6 +28,7 @@ function AppContent() {
 
   // Fetch context when app loads or when connection status changes
   useEffect(() => {
+    console.log('ready', ready);
     sdk.actions.ready();
 
     async function fetchContext() {
